@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import backgroundImage from "./img/download.jpeg";
-
 import "./App.css";
 
 function App() {
@@ -98,6 +97,7 @@ function App() {
             <a
               className="footer-link"
               target="_blank"
+              rel="noreferrer"
               href="https://github.com/vladasanadev/react-weather"
             >
               Open source code
