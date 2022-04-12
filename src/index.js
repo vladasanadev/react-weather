@@ -94,6 +94,15 @@ function App() {
               </ul>
             </section>
           </main>
+          <h4 className="footer-link">
+            <a
+              className="footer-link"
+              target="_blank"
+              href="https://github.com/vladasanadev/react-weather"
+            >
+              Open source code
+            </a>
+          </h4>
         </div>
         <script src="./index.js"></script>
       </body>
