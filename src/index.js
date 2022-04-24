@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import backgroundImage from "./img/download.jpeg";
 import { TopForm } from "./TopForm";
 import { Weather } from "./Weather";
 import "./App.css";
@@ -18,8 +17,6 @@ function App() {
   const [forecast, setForecast] = useState([]);
   const [lon, setLon] = useState("");
   const [lat, setLat] = useState("");
-
-  const setPosition = () => {};
 
   const getCurrentForecast = () => {
     navigator.geolocation.getCurrentPosition((position) => {
