@@ -1,98 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import backgroundImage from "./img/download.jpeg";
+import { TopForm } from "./TopForm";
+import { Weather } from "./Weather";
 import "./App.css";
+import axios from "axios";
 
 function App() {
-  let weatherInfo = {
-    city: "Kyiv, Ukraine",
-    temperature: 10,
+  const [inputcity, setCity] = useState("");
+
+  const [weather, setWeather] = useState({
+    main: { temp: 18, pressure: 22, humidity: 10 },
+    wind: {
+      speed: "22",
+    },
+  });
+  const [forecast, setForecast] = useState([]);
+  const [lon, setLon] = useState("");
+  const [lat, setLat] = useState("");
+
+  const setPosition = () => {};
+
+  const getCurrentForecast = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position.coords.latitude);
+      const long = Math.round(position.coords.latitude);
+      const lati = Math.round(position.coords.longitude);
+      const APIKey = "80374f039ac77c49488d6b98bd64b1ff";
+      console.log(lati, long);
+      let APICurrent = `https://api.openweathermap.org/data/2.5/onecall?lat=${lati}&lon=${long}&appid=${APIKey}&units=metric`;
+      axios.get(APICurrent).then((res) => {
+        console.log("Curr position First Forecast in index js");
+        console.log(res.data, "Curr position First Forecast in index js");
+        setForecast(res.data.daily);
+      });
+    });
   };
+  useEffect(() => {
+    console.log("useef in js");
+    getCurrentForecast();
+  }, []);
+
   return (
     <div className="App">
       <body>
         <div className="wrapper">
-          <header>
-            <form>
-              <input
-                autofocus
-                placeholder="Type City"
-                className="header-select"
-                type="text"
-              />
-              <input value="Search" type="submit" className="header-btn" />
-            </form>
-          </header>
-          <main style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <section className="weather-today">
-              <div className="main-row">
-                <img
-                  src="https://bmcdn.nl/assets/weather-icons/v2.1/fill/hail.svg"
-                  className="main-img"
-                  width="300"
-                  alt="weather-description"
-                />
-                <div>
-                  <h1>{weatherInfo.temperature}°</h1>
-                  <h2 className="main-city">{weatherInfo.city}</h2>
-                  <div className="button-container">
-                    <button>Today</button>
-                    <button>Tomorrow</button>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section className="main-week">
-              <ul>
-                <li>
-                  <h5>Mon</h5>
-                  <img
-                    width="50"
-                    src="https://bmcdn.nl/assets/weather-icons/v2.1/fill/clear-day.svg"
-                    alt="Good Sunny Weather"
-                  />
-                  <small>16</small>
-                </li>
-                <li>
-                  <h5>Tue</h5>
-                  <img
-                    width="50"
-                    src="https://bmcdn.nl/assets/weather-icons/v2.1/fill/clear-day.svg"
-                    alt="Good Sunny Weather"
-                  />
-                  <small>16</small>
-                </li>
-                <li>
-                  <h5>Wed</h5>
-                  <img
-                    width="50"
-                    src="https://bmcdn.nl/assets/weather-icons/v2.1/fill/clear-day.svg"
-                    alt="Good Sunny Weather"
-                  />
-                  <small>16</small>
-                </li>
-                <li>
-                  <h5>Thu</h5>
-                  <img
-                    width="50"
-                    src="https://bmcdn.nl/assets/weather-icons/v2.1/fill/clear-day.svg"
-                    alt="Good Sunny Weather"
-                  />
-                  <small>16</small>
-                </li>
-                <li>
-                  <h5>Fri</h5>
-                  <img
-                    width="50"
-                    src="https://bmcdn.nl/assets/weather-icons/v2.1/fill/clear-day.svg"
-                    alt="Good Sunny Weather"
-                  />
-                  <small>16</small>
-                </li>
-              </ul>
-            </section>
-          </main>
+          <TopForm
+            setLon={setLon}
+            setLat={setLat}
+            lon={lon}
+            lat={lat}
+            inputcity={inputcity}
+            setCity={setCity}
+            setWeather={setWeather}
+            setForecast={setForecast}
+          />
+          <Weather
+            lat={lat}
+            lon={lon}
+            inputcity={inputcity}
+            weather={weather}
+            forecast={forecast}
+          />
           <h4 className="footer-link">
             <a
               className="footer-link"
