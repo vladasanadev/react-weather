@@ -12,6 +12,7 @@ export const Weather = ({ inputcity, weather, forecast }) => {
         : `${current.getMinutes()}`;
     return `${current.getHours()}:${min}`;
   };
+  const [time, setTime] = useState(setDate());
 
   return (
     <main style={{ backgroundImage: `url(${backgroundImage})` }}>
