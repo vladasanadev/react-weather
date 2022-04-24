@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Time } from "./Time";
 import { Forecast } from "./Forecast";
 
-export const Weather = ({ inputcity, weather, lat, lon, forecast }) => {
+export const Weather = ({ inputcity, weather, forecast }) => {
   const setDate = () => {
     let current = new Date();
     let min =
