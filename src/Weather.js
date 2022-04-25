@@ -1,5 +1,5 @@
 import backgroundImage from "./img/download.jpeg";
-import React, { useState } from "react";
+import React from "react";
 import { Time } from "./Time";
 import { Forecast } from "./Forecast";
 
@@ -12,8 +12,6 @@ export const Weather = ({ inputcity, weather, forecast }) => {
         : `${current.getMinutes()}`;
     return `${current.getHours()}:${min}`;
   };
-  const [time, setTime] = useState(setDate());
-
   return (
     <main style={{ backgroundImage: `url(${backgroundImage})` }}>
       <section className="weather-today">
@@ -25,7 +23,7 @@ export const Weather = ({ inputcity, weather, forecast }) => {
             alt="weather-description"
           />
           <div>
-            <Time time={time} />
+            <Time time={setDate()} />
             <h1>{Math.round(weather?.main.temp)}°</h1>
             <h2 className="main-city">{inputcity}</h2>
             <p className="main-humidity">Humidity: {weather.main.humidity}%</p>

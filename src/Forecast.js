@@ -1,10 +1,8 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
 
 export const Forecast = ({ forecast = undefined }) => {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  console.log("FORECAST IN FOR", forecast);
   return (
     <section className="main-week">
       <ul>
@@ -22,6 +20,7 @@ export const Forecast = ({ forecast = undefined }) => {
               </li>
             );
           }
+          return undefined;
         })}
       </ul>
     </section>
